@@ -1,0 +1,730 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Healthy Bites — Multimedia Sharing</title>
+
+    <link rel="stylesheet" type="text/css" href="CSS/bootstrap.min.css" />
+
+    <style>
+      :root {
+        --bg: #f7faf9;
+        --panel: #ffffff;
+        --stroke: #d9e2dd;
+
+        --text: #0b1220;
+        --muted: #334155;
+
+        --accent: #0f766e;
+        --accent-dark: #0b5f59;
+        --accent-soft: rgba(15, 118, 110, 0.14);
+
+        --danger: #b91c1c;
+
+        --radius-lg: 18px;
+        --radius-md: 14px;
+
+        --shadow: 0 14px 34px rgba(2, 8, 23, 0.1);
+        --shadow-soft: 0 10px 26px rgba(2, 8, 23, 0.07);
+
+        --max: 1200px;
+
+        --fs-base: 16px;
+        --fs-small: 0.95rem;
+        --fs-h2: 1.7rem;
+        --fs-h3: 1.12rem;
+
+        --focus: 0 0 0 4px rgba(15, 118, 110, 0.18);
+      }
+
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+        font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto,
+          Arial, "Noto Sans", "Apple Color Emoji", "Segoe UI Emoji";
+      }
+
+      body {
+        font-size: var(--fs-base);
+        background: radial-gradient(
+            1200px 800px at 20% -10%,
+            rgba(15, 118, 110, 0.12),
+            transparent 55%
+          ),
+          radial-gradient(
+            1000px 700px at 90% 10%,
+            rgba(34, 197, 94, 0.1),
+            transparent 55%
+          ),
+          linear-gradient(180deg, #ffffff 0%, var(--bg) 40%, #ffffff 100%);
+        color: var(--text);
+        line-height: 1.6;
+      }
+
+      a {
+        color: inherit;
+        text-decoration: none;
+      }
+
+      .wrap {
+        width: min(var(--max), 94%);
+        margin: 0 auto;
+      }
+
+      header.site-header {
+        position: sticky;
+        top: 0;
+        z-index: 20;
+        backdrop-filter: blur(10px);
+        background: rgba(255, 255, 255, 0.72);
+        border-bottom: 1px solid rgba(217, 226, 221, 0.85);
+      }
+
+      .header-inner {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 14px;
+        padding: 14px 0;
+      }
+
+      .brand {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        min-width: 240px;
+      }
+
+      .brand-mark {
+        width: 38px;
+        height: 38px;
+        border-radius: 12px;
+        background: linear-gradient(135deg, var(--accent), #22c55e);
+        box-shadow: 0 10px 22px rgba(15, 118, 110, 0.22);
+      }
+
+      .brand-text {
+        display: flex;
+        flex-direction: column;
+        line-height: 1.1;
+      }
+
+      .brand-title {
+        font-weight: 975;
+        letter-spacing: -0.35px;
+        font-size: 1.05rem;
+      }
+
+      .brand-subtitle {
+        color: var(--muted);
+        font-size: 0.9rem;
+        margin-top: 2px;
+      }
+
+      .header-actions {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        flex-wrap: wrap;
+        justify-content: flex-end;
+      }
+
+      main {
+        padding: 18px 0 28px;
+      }
+
+      section {
+        padding: 18px 0;
+      }
+
+      .section-head {
+        display: flex;
+        align-items: end;
+        justify-content: space-between;
+        gap: 16px;
+        margin: 8px 0 12px;
+      }
+
+      .section-title h2 {
+        font-size: var(--fs-h2);
+        font-weight: 975;
+        letter-spacing: -0.35px;
+      }
+
+      .section-title p {
+        color: var(--muted);
+        margin-top: 6px;
+        max-width: 80ch;
+        font-size: 1rem;
+      }
+
+      .panel {
+        border: 1px solid var(--stroke);
+        background: rgba(255, 255, 255, 0.96);
+        border-radius: var(--radius-lg);
+        padding: 18px;
+        box-shadow: var(--shadow-soft);
+      }
+
+      .cardx {
+        border: 1px solid var(--stroke);
+        background: var(--panel);
+        border-radius: var(--radius-md);
+        padding: 16px;
+      }
+
+      .cardx h3 {
+        font-size: var(--fs-h3);
+        font-weight: 975;
+        letter-spacing: -0.2px;
+        margin-bottom: 6px;
+      }
+
+      .hint {
+        color: var(--muted);
+        font-size: var(--fs-small);
+      }
+
+      .grid-2 {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 12px;
+      }
+
+      .field {
+        display: flex;
+        flex-direction: column;
+        gap: 6px;
+      }
+
+      .label {
+        font-weight: 900;
+        color: var(--text);
+        font-size: 0.95rem;
+      }
+
+      .input {
+        width: 100%;
+        padding: 12px 12px;
+        border-radius: 12px;
+        border: 1px solid rgba(148, 163, 184, 0.55);
+        background: #ffffff;
+        color: var(--text);
+        outline: none;
+      }
+
+      .input::placeholder {
+        color: rgba(51, 65, 85, 0.65);
+      }
+
+      .input:focus {
+        border-color: rgba(15, 118, 110, 0.72);
+        box-shadow: var(--focus);
+      }
+
+      textarea.input {
+        resize: vertical;
+        min-height: 120px;
+      }
+
+      .actions {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        justify-content: flex-start;
+        margin-top: 12px;
+      }
+
+      .btnx {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+        padding: 11px 16px;
+        border-radius: 12px;
+        border: 1px solid transparent;
+        cursor: pointer;
+        font-size: 0.98rem;
+        font-weight: 900;
+        transition: transform 0.14s ease, background 0.14s ease,
+          border-color 0.14s ease, box-shadow 0.14s ease;
+        user-select: none;
+        white-space: nowrap;
+      }
+
+      .btnx:active {
+        transform: translateY(1px);
+      }
+
+      .btnx-primary {
+        background: linear-gradient(135deg, var(--accent), #22c55e);
+        color: white;
+        box-shadow: 0 12px 24px rgba(15, 118, 110, 0.22);
+      }
+
+      .btnx-primary:hover {
+        transform: translateY(-1px);
+        box-shadow: 0 16px 30px rgba(15, 118, 110, 0.26);
+      }
+
+      .btnx-outline {
+        background: #ffffff;
+        border-color: rgba(148, 163, 184, 0.6);
+        color: var(--text);
+        box-shadow: none;
+      }
+
+      .btnx-outline:hover {
+        background: rgba(2, 8, 23, 0.04);
+        transform: translateY(-1px);
+      }
+
+      .btnx-success {
+        background: linear-gradient(135deg, var(--accent), #22c55e);
+        color: white;
+        box-shadow: 0 12px 24px rgba(15, 118, 110, 0.22);
+      }
+
+      .btnx-success:hover {
+        transform: translateY(-1px);
+        box-shadow: 0 16px 30px rgba(15, 118, 110, 0.26);
+      }
+
+      .btnx-danger-outline {
+        border-color: rgba(185, 28, 28, 0.35);
+        background: rgba(185, 28, 28, 0.08);
+        color: var(--text);
+      }
+
+      .btnx-danger-outline:hover {
+        background: rgba(185, 28, 28, 0.12);
+        transform: translateY(-1px);
+      }
+
+      #ImageList.media-grid,
+      #RecipeList.media-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+        gap: 14px;
+        margin-top: 12px;
+      }
+
+      .media-card {
+        border: 1px solid var(--stroke);
+        background: var(--panel);
+        border-radius: var(--radius-md);
+        overflow: hidden;
+        box-shadow: var(--shadow-soft);
+        transition: transform 0.16s ease, box-shadow 0.16s ease,
+          border-color 0.16s ease;
+      }
+
+      .media-card:hover {
+        transform: translateY(-3px);
+        border-color: rgba(15, 118, 110, 0.28);
+        box-shadow: var(--shadow);
+      }
+
+      .media-thumb {
+        width: 100%;
+        height: 190px;
+        background: rgba(2, 8, 23, 0.04);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        overflow: hidden;
+        position: relative;
+      }
+
+      .media-thumb img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        display: block;
+        transform: scale(1);
+        transition: transform 0.3s ease;
+      }
+
+      .media-card:hover .media-thumb img {
+        transform: scale(1.03);
+      }
+
+      .media-body {
+        padding: 12px 12px 14px;
+      }
+
+      .media-title {
+        display: block;
+        font-weight: 975;
+        letter-spacing: -0.1px;
+        margin-bottom: 0;
+      }
+
+      .recipe-meta {
+        color: var(--muted);
+        font-size: var(--fs-small);
+      }
+
+      .recipe-card {
+        cursor: pointer;
+      }
+
+      .hidden {
+        display: none !important;
+      }
+
+      .recipe-detail-image {
+        width: 100%;
+        max-height: 380px;
+        object-fit: cover;
+        border-radius: var(--radius-md);
+        border: 1px solid var(--stroke);
+        box-shadow: var(--shadow-soft);
+      }
+
+      .divider {
+        height: 1px;
+        background: var(--stroke);
+        margin: 16px 0;
+      }
+
+      .kv-wrap {
+        margin-top: 16px;
+        padding-top: 12px;
+        border-top: 1px solid var(--stroke);
+      }
+
+      .kv-title {
+        font-weight: 975;
+        margin-bottom: 8px;
+      }
+
+      .kv-table {
+        width: 100%;
+        border-collapse: collapse;
+        font-size: 0.95rem;
+        border: 1px solid var(--stroke);
+        border-radius: var(--radius-md);
+        overflow: hidden;
+        background: #ffffff;
+      }
+
+      .kv-table th,
+      .kv-table td {
+        padding: 10px 12px;
+        border-bottom: 1px solid var(--stroke);
+        vertical-align: top;
+        text-align: left;
+      }
+
+      .kv-table th {
+        width: 220px;
+        font-weight: 975;
+        color: var(--text);
+        background: rgba(2, 8, 23, 0.04);
+        word-break: break-word;
+      }
+
+      .kv-table td {
+        color: rgba(2, 8, 23, 0.86);
+        word-break: break-word;
+        white-space: pre-wrap;
+      }
+
+      @media (max-width: 860px) {
+        .grid-2 {
+          grid-template-columns: 1fr;
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <header class="site-header">
+      <div class="wrap">
+        <div class="header-inner">
+          <a class="brand" href="#top" aria-label="Healthy Bites home">
+            <div class="brand-mark" aria-hidden="true"></div>
+            <div class="brand-text">
+              <div class="brand-title">Healthy Bites</div>
+              <div class="brand-subtitle">Multimedia Sharing & Recipes</div>
+            </div>
+          </a>
+
+          <div class="header-actions">
+            <a class="btnx btnx-outline" href="#upload">Upload</a>
+            <a class="btnx btnx-outline" href="#gallery">Gallery</a>
+            <a class="btnx btnx-primary" href="#recipes">Recipes</a>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main id="top">
+      <section id="upload">
+        <div class="wrap">
+          <div class="section-head">
+            <div class="section-title">
+              <h2>Upload an Image</h2>
+              <p>Add your details and choose an image to upload.</p>
+            </div>
+          </div>
+
+          <div class="panel">
+            <div class="cardx">
+              <h3>Image Details</h3>
+              <div class="hint">Enter your user details and select a file.</div>
+
+              <div style="height: 12px"></div>
+
+              <div class="grid-2">
+                <div class="field">
+                  <div class="label">User Id</div>
+                  <input
+                    class="input"
+                    id="userID"
+                    type="text"
+                    placeholder="e.g. B00879971"
+                  />
+                </div>
+
+                <div class="field">
+                  <div class="label">User Name</div>
+                  <input
+                    class="input"
+                    id="userName"
+                    type="text"
+                    placeholder="e.g. Niall Fallon"
+                  />
+                </div>
+
+                <div class="field" style="grid-column: 1 / -1">
+                  <div class="label">File to Upload</div>
+                  <input class="input" id="UpFile" type="file" accept="image/*" />
+                </div>
+              </div>
+
+              <div class="actions">
+                <button class="btnx btnx-success" id="subNewForm" type="button">
+                  Submit
+                </button>
+                <button class="btnx btnx-outline" id="retImages" type="button">
+                  View Images
+                </button>
+              </div>
+
+              <div class="hint" id="statusBox" style="margin-top: 10px">
+                Status: ready.
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="gallery">
+        <div class="wrap">
+          <div class="section-head">
+            <div class="section-title">
+              <h2>Gallery</h2>
+              <p>View uploaded images below.</p>
+            </div>
+          </div>
+
+          <div id="ImageList"></div>
+        </div>
+      </section>
+
+      <section id="recipes">
+        <div class="wrap">
+          <div class="section-head">
+            <div class="section-title">
+              <h2>Recipes</h2>
+              <p>Create recipes, browse the list, search by title, and edit.</p>
+            </div>
+          </div>
+
+          <div class="panel">
+            <div class="cardx">
+              <h3>Add Recipe</h3>
+              <div class="hint">Fill in the recipe form and submit.</div>
+
+              <div style="height: 12px"></div>
+
+              <div class="grid-2">
+                <div class="field">
+                  <div class="label">Title</div>
+                  <input
+                    class="input"
+                    id="RecipeTitle"
+                    type="text"
+                    placeholder="e.g. High-Protein Overnight Oats"
+                  />
+                </div>
+
+                <div class="field">
+                  <div class="label">Description</div>
+                  <input
+                    class="input"
+                    id="RecipeDescription"
+                    type="text"
+                    placeholder="Short description..."
+                  />
+                </div>
+
+                <div class="field">
+                  <div class="label">Calories</div>
+                  <input
+                    class="input"
+                    id="RecipeCalories"
+                    type="number"
+                    placeholder="e.g. 450"
+                  />
+                </div>
+
+                <div class="field">
+                  <div class="label">Prep Time</div>
+                  <input
+                    class="input"
+                    id="RecipePrepTime"
+                    type="text"
+                    placeholder="e.g. 10 mins"
+                  />
+                </div>
+
+                <div class="field">
+                  <div class="label">Category</div>
+                  <select class="input" id="RecipeCategory">
+                    <option value="">Select a category...</option>
+                    <option value="Breakfast">Breakfast</option>
+                    <option value="Lunch">Lunch</option>
+                    <option value="Dinner">Dinner</option>
+                  </select>
+                </div>
+
+                <div class="field">
+                  <div class="label">Linked Image Id (optional)</div>
+                  <input
+                    class="input"
+                    id="RecipeImageId"
+                    type="text"
+                    placeholder="Paste an image id (Cosmos image doc id)"
+                  />
+                </div>
+              </div>
+
+              <div style="height: 12px"></div>
+
+              <div class="grid-2">
+                <div class="field">
+                  <div class="label">Ingredients (comma-separated)</div>
+                  <textarea
+                    class="input"
+                    id="RecipeIngredients"
+                    rows="4"
+                    placeholder="e.g. oats, greek yogurt, milk"
+                  ></textarea>
+                </div>
+
+                <div class="field">
+                  <div class="label">Steps (one per line)</div>
+                  <textarea
+                    class="input"
+                    id="RecipeSteps"
+                    rows="4"
+                    placeholder="Step 1...&#10;Step 2..."
+                  ></textarea>
+                </div>
+              </div>
+
+              <div style="height: 12px"></div>
+
+              <div class="grid-2">
+                <div class="field">
+                  <div class="label">User Name (optional)</div>
+                  <input
+                    class="input"
+                    id="RecipeUserName"
+                    type="text"
+                    placeholder="e.g. Niall Fallon"
+                  />
+                </div>
+                <div></div>
+              </div>
+
+              <div class="actions">
+                <button class="btnx btnx-success" id="postRecipe" type="button">
+                  Submit Recipe
+                </button>
+                <button
+                  class="btnx btnx-outline"
+                  id="clearRecipeForm"
+                  type="button"
+                >
+                  Clear
+                </button>
+              </div>
+            </div>
+
+            <div class="divider"></div>
+
+            <div class="cardx">
+              <h3>Browse & Search</h3>
+              <div class="hint">
+                Load the full list, then filter by title (press
+                <strong>Enter</strong>).
+              </div>
+
+              <div style="height: 12px"></div>
+
+              <div class="actions">
+                <button class="btnx btnx-outline" id="retRecipes" type="button">
+                  View Recipes
+                </button>
+              </div>
+
+              <div style="height: 12px"></div>
+
+              <div class="grid-2">
+                <div class="field">
+                  <div class="label">Find a recipe by title</div>
+                  <input
+                    class="input"
+                    id="RecipeTitleQuery"
+                    type="text"
+                    placeholder="e.g. Overnight Oats"
+                  />
+                  <div class="recipe-meta" style="margin-top: 6px">
+                    Partial titles work (e.g. <em>oats</em>, <em>chicken</em>).
+                  </div>
+                </div>
+
+                <div style="display: flex; align-items: end">
+                  <button class="btnx btnx-primary" id="getRecipeByTitle" type="button">
+                    Search
+                  </button>
+                </div>
+              </div>
+
+              <div style="height: 14px"></div>
+
+              <div id="RecipeList" class="media-grid"></div>
+
+              <div style="height: 14px"></div>
+
+              <div id="RecipeDetails">
+                <div id="recipeView"></div>
+                <div id="recipeEdit" class="hidden"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <script src="JS/jquery-3.6.0.min.js"></script>
+    <script src="JS/bootstrap.bundle.min.js"></script>
+    <script src="JS/app.js"></script>
+  </body>
+</html>
