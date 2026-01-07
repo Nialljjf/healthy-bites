@@ -1,4 +1,4 @@
-name: Deploy to Azure Static Website
+name: Deploy to Azure Storage Static Website
 
 on:
   push:
@@ -6,35 +6,20 @@ on:
       - main
 
 jobs:
-  build-and-deploy:
+  deploy:
     runs-on: ubuntu-latest
 
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: 18
-
-      - name: Install dependencies
-        run: |
-          cd frontend
-          npm install
-
-      - name: Build frontend
-        run: |
-          cd frontend
-          npm run build
-
-      - name: Deploy to Azure Storage Static Website
+      - name: Upload static site to Azure
         uses: azure/CLI@v2
         with:
           inlineScript: |
             az storage blob upload-batch \
-              --account-name ${{ secrets.AZURE_STORAGE_ACCOUNT_NAME }} \
-              --account-key  ${{ secrets.AZURE_STORAGE_ACCOUNT_KEY }} \
+              --account-name "${{ secrets.AZURE_STORAGE_ACCOUNT_NAME }}" \
+              --account-key "${{ secrets.AZURE_STORAGE_ACCOUNT_KEY }}" \
               --destination '$web' \
-              --source frontend/dist \
+              --source frontend \
               --overwrite
