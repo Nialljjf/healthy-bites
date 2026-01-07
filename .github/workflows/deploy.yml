@@ -1,19 +1,14 @@
 name: Deploy to Azure Storage Static Website
-
 on:
   push:
-    branches:
-      - main
+    branches: [ main ]
 
 jobs:
   deploy:
     runs-on: ubuntu-latest
-
     steps:
       - uses: actions/checkout@v4
-
-      - name: Upload static site to Azure
-        uses: azure/CLI@v2
+      - uses: azure/CLI@v2
         with:
           inlineScript: |
             az storage blob upload-batch \
